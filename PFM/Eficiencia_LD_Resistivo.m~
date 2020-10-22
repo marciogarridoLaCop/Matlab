@@ -1,0 +1,87 @@
+% Função de eficiência incremental LD Banda Larga
+% Com casamento resistivo
+% Autor : Marcio Garrido 
+% Exercicio 4.14 
+
+eff_inc_LD_BLarga = @(S_L, R_S, freq, C_L, R_L, R_MATCH)...
+                (S_L^2/R_S)*((2*R_S)/(2*R_S +... 
+                 1i*freq_ang*R_L*C_L*(R_S + R_MATCH)))^2;
+             
+eff_inc_LD_BLarga_2 = @(S_L, R_S, freq, C_L, R_L, R_MATCH)...
+                (R_L*s_l^2/(R_L + R_S))*((R_S + R_L)/(R_S + R_L +... 
+                 1i*freq_ang*R_L*C_L*(R_S + R_MATCH)))^2;
+
+% Capacitância do diodo laser:
+C_L = 20e-12;
+% Ganho de modulação do diodo Laser:
+S_L = 0.045;
+% Resistência da fonte:
+R_S = 50;
+% Resistência do diodo laser em vetor:
+R_L = [5 2 5 10];
+% Resistência de casamento(circuito de casamento) em vetor:
+R_MATCH = [0 48 45 40];
+
+% criando linha de matriz para frequencia
+freq =linspace(0.01e9, 10e9, 10000);
+freq_ang=(2*pi).*freq;
+
+
+% criando array de 2 indices para acumular o resultado do cálculo da funcao
+abs_eff_inc_LD_BL = zeros(size(R_L, 2), size(freq, 2));
+
+fc_indice = zeros(size(R_L));
+
+delta = 3;
+
+for ii = 1:size(R_L, 2)
+    
+    if ii == 1
+       
+        for i = 1:size(freq, 2)
+            % chamando a funcao para calcular
+            abs_eff_inc_LD_BL(ii, i) = 10*log10(abs(eff_inc_LD_BLarga_2(S_L, R_S,... 
+            freq(i), C_L, R_L(ii), R_MATCH(ii))));
+
+        end
+
+    else
+        
+        for i = 1:size(freq, 2)
+
+            abs_eff_inc_LD_BL(ii, i) = 10*log10(abs(eff_inc_LD_BLarga(S_L, R_S,... 
+            freq(i), C_L, R_L(ii), R_MATCH(ii))));
+
+        end
+    
+    end
+    % Pegar o primeiro valor referente ao R_L
+    y0 = abs_eff_inc_LD_BLarga(ii, 1);
+    l = find(abs_eff_inc_LD_BLarga(ii, :) <= y0 - delta);
+    y_c = l(1);
+    fc_indice(ii) = y_c;
+end
+
+figure();
+semilogx(freq, abs_eff_inc_LD_BL, 'LineWidth', 2);
+hold on;
+plot(freq(fc_indice), diag(abs_eff_inc_LD_BLarga(:, fc_indice)), 'o', 'LineWidth', 2);
+hold off;
+
+legend({'$R_L = 5 \Omega / R_{MATCH} = 0 \Omega $',... 
+        '$R_L = 2 \Omega / R_{MATCH} = 48 \Omega $',... 
+        '$R_L = 5 \Omega / R_{MATCH} = 45 \Omega $',... 
+        '$R_L = 10 \Omega / R_{MATCH} = 40 \Omega $',...
+        'Frequencia de corte'},...
+        'Interpreter', 'latex','FontSize', 12);
+
+grid on;
+title( sprintf('LD - Banda Larga com casamento resistivo \n (Fc1 R_L = 5 = %0.2f  GHz) \n Fc2 (R_L = 2 = %0.2f  GHz) \n Fc3 (R_L = 5 = %0.2f  GHz) \n Fc4 (R_L = 10 = %0.2f  GHz) \n ', ...
+    (fc_indice(1)*0.01), (fc_indice(2)*0.01),(fc_indice(3)*0.01),(fc_indice(4)*0.01)));
+
+xlabel('Frequency (GHz)', 'FontSize', 16);
+ylabel('Incremental Modulation Efficiency (dB)', 'FontSize', 16);
+ax = gca;
+ax.XTick = [1e8 1e9 1e10];
+ax.XTickLabel = [0.1 1 10];
+ax.YLim = [-60 -35];
