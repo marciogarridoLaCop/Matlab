@@ -1,4 +1,4 @@
-# Matlab Application
+Optimization Overview
 
 You may not realize it, but optimization is a part of our daily lives. 
 Take running errands, for example. There are many ways to get from your house to the grocery store, but how do you find the quickest route? 
