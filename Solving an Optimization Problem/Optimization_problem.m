@@ -18,7 +18,7 @@ initialGuess.y = 0;
 [sol,optval] = solve(prob,initialGuess)
 xOpt = sol.x 
 yOpt = sol.y
-plotstores
+plotstores(X,Y);
 hold on
 scatter(xOpt,yOpt)
 hold off
