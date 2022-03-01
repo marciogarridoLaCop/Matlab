@@ -9,14 +9,28 @@ which represents the quantity that you'd like to optimize, but they can be hard 
 limitations placed on the allowable solutions.
 ## Approach 
 
-Creating an optimization problem
-    - Create a variable to store description problem
+1) Creating an optimization problem
+    - Create an optimization problem named prob and add the description "Factory Location".
         
-        prob = optimproblem("Description","My Optimization Problem");
+        prob = optimproblem("Description","Factory Location");
 
+    - You can use the show function to display the contents of an optimization problem in an easy-to-read way.
+        
+        show(prob)
 
-Defining relevant variables and the function upon which they depend
-Adding constraints to possible solutions and finding the optimal solution
+2) Defining relevant variables and the function upon which they depend
+
+    - Define optimization variables using the optimvar function. 
+Create a symbolic optimization variable x and y that represents the x-coordinate and y-coordinate of your factory. Name the variable "x" and "y".
+       ![alt text](https://image.prntscr.com/image/ajXgmN4qS72U0hmfclQdCA.png)
+
+        x = optimvar("x")
+        y = optimvar("y")
+
+3) Adding constraints to possible solutions and finding the optimal solution
+
+    The x- and y-coordinates of the three stores have been stored in vectors X and Y for you.
+
 Solving three realistic optimization problems, such as determining the best location for a factory that provides inventory to three stores
 
 
