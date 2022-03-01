@@ -14,11 +14,12 @@ d = sqrt((x-X).^2 + (y-Y).^2);
 dTotal = sum(d);
 prob.Objective = dTotal;
 show(prob)
-initialGuess.x = 14;
-initialGuess.y = 34; 
+initialGuess.x = 0;
+initialGuess.y = 0; 
 [sol,optval] = solve(prob,initialGuess)
 xOpt = sol.x 
 yOpt = sol.y
+plotstores
 hold on
-scatter(xOpt,YOpt)
+scatter(xOpt,yOpt)
 hold off
