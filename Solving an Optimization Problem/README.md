@@ -21,9 +21,8 @@ limitations placed on the allowable solutions.
 2) Defining relevant variables and the function upon which they depend
 
     - Define optimization variables using the optimvar function. 
-Create a symbolic optimization variable x and y that represents the x-coordinate and y-coordinate of your factory. Name the variable "x" and "y".
-       ![alt text](https://image.prntscr.com/image/ajXgmN4qS72U0hmfclQdCA.png)
-
+    Create a symbolic optimization variable x and y that represents the x-coordinate and y-coordinate of your factory. Name the variable "x" and "y".
+       
         x = optimvar("x")
         y = optimvar("y")
 
@@ -36,9 +35,8 @@ Create a symbolic optimization variable x and y that represents the x-coordinate
     
     The distance between the factory and the three stores is calculated using the following equation:
     
-        ```math
-            d=\sqrt{(x-X)^2 + (y-Y)^2}
-        ```
+          ![formula](https://render.githubusercontent.com/render/math?math=d=\sqrt{(x-X)^2 + (y-Y)^2}
+   
     Where x and y are your symbolic optimization variables, and X and Y are the coordinates of the stores.
     Create an optimization expression for the distance between the factory location (x,y) and the location of each of the stores (X,Y). 
     Make sure to use element-wise exponentiation (.^) when squaring the differences between the x- and y-coordinates and store the result in a variable d.
