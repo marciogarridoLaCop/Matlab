@@ -12,8 +12,7 @@
 Optimization problems all involve minimizing or maximizing something called an objective function, which represents the quantity that you'd like to optimize, but they can be hard to solve since they can have limitations placed on the allowable solutions.
 ## Approach 
 
-1) Creating an optimization problem
-    Create an optimization problem named prob and add the description "Factory Location".
+1) Creating an optimization problem named prob and add the description "Factory Location".
     
         prob = optimproblem("Description","Factory Location");
 
