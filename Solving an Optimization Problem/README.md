@@ -35,7 +35,9 @@ limitations placed on the allowable solutions.
     
     The distance between the factory and the three stores is calculated using the following equation:
     
-          ![formula](https://render.githubusercontent.com/render/math?math=d=\sqrt{(x-X)^2 + (y-Y)^2}
+        <img src="https://render.githubusercontent.com/render/math?math=e^{i \pi} = -1">
+          
+        ![formula](https://render.githubusercontent.com/render/math?math=d=\sqrt{(x-X)^2 + (y-Y)^2}
    
     Where x and y are your symbolic optimization variables, and X and Y are the coordinates of the stores.
     Create an optimization expression for the distance between the factory location (x,y) and the location of each of the stores (X,Y). 
