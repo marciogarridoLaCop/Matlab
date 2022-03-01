@@ -1,0 +1,6 @@
+
+# List of untracked files to ignore
+**/logs
+**/resources/
+resources/
+GitHub.prj
