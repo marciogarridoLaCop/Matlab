@@ -1,30 +1,31 @@
+# Universidade Federal Fluminense
+
+
+[![N|Solid](https://upload.wikimedia.org/wikipedia/pt/thumb/4/47/UFF_bras%C3%A3o.png/200px-UFF_bras%C3%A3o.png)](http://www.ppgeet.uff.br/site/)
+## Matlab exercises 
+
+
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 # Optimization Overview Matlab
 
-You may not realize it, but optimization is a part of our daily lives. 
-Take running errands, for example. There are many ways to get from your house to the grocery store, but how do you find the quickest route? 
-Well, the GPS says this way looks good, but while you're driving, traffic develops. Now what's the fastest route?
-
-Optimization problems all involve minimizing or maximizing something called an objective function, 
-which represents the quantity that you'd like to optimize, but they can be hard to solve since they can have 
-limitations placed on the allowable solutions.
+Optimization problems all involve minimizing or maximizing something called an objective function, which represents the quantity that you'd like to optimize, but they can be hard to solve since they can have limitations placed on the allowable solutions.
 ## Approach 
 
 1) Creating an optimization problem
-    - Create an optimization problem named prob and add the description "Factory Location".
-        
+    Create an optimization problem named prob and add the description "Factory Location".
+    
         prob = optimproblem("Description","Factory Location");
 
-    - You can use the show function to display the contents of an optimization problem in an easy-to-read way.
+    You can use the show function to display the contents of an optimization problem in an easy-to-read way.
         
         show(prob)
 
 2) Defining relevant variables and the function upon which they depend
 
-    - Define optimization variables using the optimvar function. 
-    Create a symbolic optimization variable x and y that represents the x-coordinate and y-coordinate of your factory. Name the variable "x" and "y".
+    Define optimization variables using the optimvar function. Create a symbolic optimization variable x and y that represents the x-coordinate and y-coordinate of your factory. Name the variable "x" and "y".
        
-        x = optimvar("x")
-        y = optimvar("y")
+        x = optimvar("x");
+        y = optimvar("y");
 
 3) Adding constraints to possible solutions and finding the optimal solution
 
@@ -35,24 +36,19 @@ limitations placed on the allowable solutions.
     
     The distance between the factory and the three stores is calculated using the following equation:
     
-        ![Figure](https://latex.codecogs.com/png.image?\dpi{110}&space;\bg_white&space;d=\sqrt{(x-X)^2+(y-Y)^2})
+    ![Figure](https://latex.codecogs.com/png.image?\dpi{110}&space;\bg_white&space;d=\sqrt{(x-X)^2+(y-Y)^2})
    
-    Where x and y are your symbolic optimization variables, and X and Y are the coordinates of the stores.
-    Create an optimization expression for the distance between the factory location (x,y) and the location of each of the stores (X,Y). 
-    Make sure to use element-wise exponentiation (.^) when squaring the differences between the x- and y-coordinates and store the result in a variable d.
+    Where x and y are your symbolic optimization variables, and X and Y are the coordinates of the stores. Create an optimization expression for the distance between the factory location (x,y) and the location of each of the stores (X,Y). Make sure to use element-wise exponentiation (.^) when squaring the differences between the x- and y-coordinates and store the result in a variable d.
     
-        d = sqrt((x-X).^2 + (y-Y).^2)
+        d = sqrt((x-X).^2 + (y-Y).^2);
 
-    Variable d is a 1-by-3 optimization expression array. Each element represents the distance to one of the three stores.
-     
+    Variable d is a 1-by-3 optimization expression array. Each element represents the distance to one of the three stores.Store the total shipping distance dTotal in the Objective field of the optimization problem prob.
     
-    Store the total shipping distance dTotal in the Objective field of the optimization problem prob.
-        
-        dTotal = sum(d)
+        dTotal = sum(d);
 
     You can store optimization expressions in the Objective field of your optimization problem using dot notation.
 
-        prob.Objective = dTotal
+        prob.Objective = dTotal;
 
     Use the show function to display the current optimization problem.
 
@@ -60,16 +56,12 @@ limitations placed on the allowable solutions.
 
 4) Solving three realistic optimization problems, such as determining the best location for a factory that provides inventory to three stores
 
-    Different types of optimization problems require different kinds of solvers to be used. 
-    In this problem, your objective function is nonlinear so you need to use a solver that is suitable for such a function. 
-    Define an initial guess structure named initialGuess for your optimization variables x and y.   
+    Different types of optimization problems require different kinds of solvers to be used. In this problem, your objective function is nonlinear so you need to use a solver that is suitable for such a function. Define an initial guess structure named initialGuess for your optimization variables x and y.   
 
         initialGuess.x = 14;
         initialGuess.y = 34; 
 
-    After defining an initial guess, you can solve the optimization problem using the solve function.
-    This function takes the optimization problem prob and your initial guess x0 as inputs and returns the solution structure sol, which contains the values of the optimization variables that yield the minimum of the objective function. 
-    It also returns the value of the objective at the solution optval.
+    After defining an initial guess, you can solve the optimization problem using the solve function. This function takes the optimization problem prob and your initial guess x0 as inputs and returns the solution structure sol, which contains the values of the optimization variables that yield the minimum of the objective function. It also returns the value of the objective at the solution optval.
     
         [sol,optval] = solve(prob,initialGuess)
 
@@ -78,15 +70,13 @@ limitations placed on the allowable solutions.
         xOpt = sol.x 
         yOpt = sol.y
     
-    You can display the optimal location of your factory using the scatter function. 
-    To plot it in the existing figure, use the hold on and hold off commands.
+    You can display the optimal location of your factory using the scatter function. To plot it in the existing figure, use the hold on and hold off commands.
 
         hold on
         scatter(xOpt,yOpt)
         hold off
-    It's also possible show where the store are placed on the map.
-
-    Create a function to show de store position
+        
+    It's also possible show where the store are placed on the map. Create a function to show de store position
 
         function plotStores()
             X = [5 40 70];
