@@ -10,7 +10,9 @@
 # Optimization Overview Matlab
 
 Optimization problems all involve minimizing or maximizing something called an objective function, which represents the quantity that you'd like to optimize, but they can be hard to solve since they can have limitations placed on the allowable solutions.
-## Approach 
+## Approach
+
+In this tutorial, you'll use MATLAB to explore the problem-based optimization workflow. You will initialize an optimization problem, define variables relevant to the problem and the function on which they depend, add limitations to the possible solutions, and ultimately find the optimal solution. By the end, you will have found the solution to one of optimization problems. The best location for a factory which provides inventory to three stores.
 
 1) Creating an optimization problem named prob and add the description "Factory Location".
     
